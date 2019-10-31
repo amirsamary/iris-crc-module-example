@@ -1,0 +1,35 @@
+ROUTINE TEST
+
+CRC
+    Set tLibPath="/usr/crc/libCRC.so"
+
+    Set libId = $ZF(-4, 1, tLibPath)
+
+    //Load function reference
+    Set crcFunctionId = $ZF(-4, 3, libId, "CalcCRC")
+
+    //Call function
+    Set ret = $ZF(-5, libId, crcFunctionId, "String to evaluate","-1")
+
+    Write !, "CRC: ", ret,!
+
+    //Unload library
+    Set sc = $ZF(-4, 2, libId)
+
+    Quit
+
+TEST
+    Set tLibPath="/usr/crc/libCRC.so"
+
+    Set libId = $ZF(-4, 1, tLibPath)
+
+    //Load function reference
+    Set testFunctionId = $ZF(-4, 3, libId, "Test")
+
+    //Call function
+    Set ret = $ZF(-5, libId, testFunctionId, "String to evaluate")
+
+    Write ret,!
+
+    //Unload library
+    Set sc = $ZF(-4, 2, libId)
